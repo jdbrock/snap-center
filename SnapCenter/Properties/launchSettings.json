@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SnapCenter": {
+      "commandName": "Project",
+      "commandLineArgs": "\"c:\\temp\\screenshots\" \"trickle-joe\" \"Trickle-iOS-DEV\" \"e49572aa-26e0-48f7-9879-cc76f1b96a35\"  \"ab3dfeb29e52be92e23b1981918c3c0cedde71c2\""
+    }
+  }
+}
