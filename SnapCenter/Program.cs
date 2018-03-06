@@ -39,6 +39,16 @@ namespace SnapCenter
                 await Console.Out.WriteLineAsync($"Test Run ID: {testRunId}");
                 await Console.Out.WriteLineAsync($"API Key: {apiKey}");
 
+                if (string.IsNullOrWhiteSpace(dir) ||
+                    string.IsNullOrWhiteSpace(user) ||
+                    string.IsNullOrWhiteSpace(app) ||
+                    string.IsNullOrWhiteSpace(testRunId) ||
+                    string.IsNullOrWhiteSpace(apiKey))
+                {
+                    await Console.Error.WriteLineAsync("All arguments are required.");
+                    return;
+                }
+
                 var api = Refit.RestService.For<IApi>("https://appcenter.ms/api/v0.1");
 
                 await Console.Out.WriteLineAsync($"Requesting test run report {testRunId}...");
@@ -97,7 +107,7 @@ namespace SnapCenter
             }
             finally
             {
-                Console.ReadKey();
+                //Console.ReadKey();
             }
         }
     }
