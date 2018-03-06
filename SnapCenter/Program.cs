@@ -51,6 +51,24 @@ namespace SnapCenter
 
                 var api = Refit.RestService.For<IApi>("https://appcenter.ms/api/v0.1");
 
+                if (testRunId.ToLower() == "latest")
+                {
+                    await Console.Out.WriteLineAsync($"Requesting latest app test runs for {user}/{app}...");
+
+                    var testRuns = await api.GetAppTestRuns(apiKey, user, app);
+
+                    testRunId = testRuns
+                        ?.OrderByDescending(x => x.Date)
+                        ?.FirstOrDefault()
+                        ?.Id;
+
+                    if (string.IsNullOrWhiteSpace(testRunId))
+                    {
+                        await Console.Error.WriteLineAsync($"ERROR: Unable to find latest test run for {user}/{app}");
+                        return;
+                    }
+                }
+
                 await Console.Out.WriteLineAsync($"Requesting test run report {testRunId}...");
                 var testRunReport = await api.GetTestRunReport(apiKey, user, app, testRunId);
 

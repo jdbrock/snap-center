@@ -8,6 +8,9 @@ namespace SnapCenter
 {
     public interface IApi
     {
+        [Get("/apps/{user}/{app}/test_runs")]
+        Task<AppTestRun.AppTestRun[]> GetAppTestRuns([Header("X-API-Token")] string apiKey, string user, string app);
+
         [Get("/apps/{user}/{app}/test_runs/{runId}/report")]
         Task<TestRun.TestRunReport> GetTestRunReport([Header("X-API-Token")] string apiKey, string user, string app, string runId);
 
